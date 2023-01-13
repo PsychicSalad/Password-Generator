@@ -90,13 +90,43 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  let person = prompt(
-    "Please enter the number for how long you want the password to be"
+  let numNotGotten = true;
+  while (numNotGotten) {
+    let userInputLength = prompt(
+      "Please enter the number for how many characters long you want the password to be"
+    );
+    userInputLength = Number.parseInt(userInputLength);
+    if (Number.isInteger(userInputLength)) {
+      numNotGotten = false;
+    }
+  }
+
+  let userInputLowercase = prompt(
+    "Would you like password to include lowercase characters? Type yes or no!"
+  );
+
+  let userInputUppercase = prompt(
+    "Would you like password to include uppercase characters? Type yes or no!"
+  );
+
+  let userInputNumbers = prompt(
+    "Would you like password to include numeric characters? Type yes or no!"
+  );
+  let userInputSpecials = prompt(
+    "Would you like password to include special characters? Type yes or no!"
   );
 }
 
+getPasswordOptions();
+
 // Function for getting a random element from an array
-function getRandom(arr) {}
+function getRandom(arr) {
+  //arraylength = arr.length;
+  //randomNoInArray = Math.floor(Math.random() * arraylength);
+  //return arr[randomNoInArray];
+}
+
+//getRandom();
 
 // Function to generate password with user input
 function generatePassword() {}
