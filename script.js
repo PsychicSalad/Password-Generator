@@ -90,46 +90,112 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  let numNotGotten = true;
-  while (numNotGotten) {
-    let userInputLength = prompt(
+  // Variable for length of password according to user input
+  let userInputLength = parseInt(
+    prompt(
       "Please enter the number for how many characters long you want the password to be"
-    );
-    userInputLength = Number.parseInt(userInputLength);
-    if (Number.isInteger(userInputLength)) {
-      numNotGotten = false;
-    }
+    )
+  );
+
+  if (isNaN(userInputLength) === true) {
+    alert("Please input a number for password length.");
+    return;
   }
 
-  let userInputLowercase = prompt(
-    "Would you like password to include lowercase characters? Type yes or no!"
+  if (userInputLength < 10) {
+    alert("Password must be at least 10 characters long.");
+    return;
+  }
+
+  if (userInputLength > 64) {
+    alert("Password must no more than 64 characters long.");
+    return;
+  }
+
+  let userInputLowercase = confirm(
+    "Would you like password to include lowercase characters?  Click OK = yes, click cancel = no!"
   );
 
-  let userInputUppercase = prompt(
-    "Would you like password to include uppercase characters? Type yes or no!"
+  let userInputUppercase = confirm(
+    "Would you like password to include uppercase characters?  Click OK = yes, click cancel = no!"
   );
 
-  let userInputNumbers = prompt(
-    "Would you like password to include numeric characters? Type yes or no!"
+  let userInputNumbers = confirm(
+    "Would you like password to include numeric characters?  Click OK = yes, click cancel = no!"
   );
-  let userInputSpecials = prompt(
-    "Would you like password to include special characters? Type yes or no!"
+  let userInputSpecials = confirm(
+    "Would you like password to include special characters? Click OK = yes, click cancel = no!"
   );
+
+  if (
+    userInputLowercase === false &&
+    userInputUppercase === false &&
+    userInputNumbers === false &&
+    userInputSpecials === false
+  ) {
+    alert("Password must contain at least one type of character.");
+    return;
+  }
+
+  let passwordOptions = {
+    length: userInputLength,
+    hasLowerCase: userInputLowercase,
+    hasUpperCase: userInputUppercase,
+    hasNumbers: userInputNumbers,
+    hasSpecialCharacters: userInputSpecials,
+  };
+
+  return passwordOptions;
 }
-
-getPasswordOptions();
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  //arraylength = arr.length;
-  //randomNoInArray = Math.floor(Math.random() * arraylength);
-  //return arr[randomNoInArray];
+  let randomIndex = Math.floor(Math.random() * arr.length);
+  let randomElement = arr[randomIndex];
+  console.log(randomElement);
+  return randomElement;
 }
 
+// Calling function to get random element from array
 //getRandom();
 
 // Function to generate password with user input
-function generatePassword() {}
+function generatePassword() {
+  let options = getPasswordOptions();
+
+  // Calling Password Options function and assigning to variable called options
+  console.log(options);
+
+  let result = [];
+
+  let possibleCharacter = [];
+
+  let guaranteedCharacter = [];
+
+  if (options.hasSpecialCharacters) {
+    possibleCharacter = possibleCharacter.concat(specialCharacters);
+    guaranteedCharacter.push(getRandom(specialCharacters));
+  }
+
+  if (options.hasLowerCase) {
+    possibleCharacter = possibleCharacter.concat(lowerCasedCharacters);
+    guaranteedCharacter.push(getRandom(lowerCasedCharacters));
+  }
+
+  if (options.hasUpperCase) {
+    possibleCharacter = possibleCharacter.concat(upperCasedCharacters);
+    guaranteedCharacter.push(getRandom(upperCasedCharacters));
+  }
+
+  if (options.hasNumbers) {
+    possibleCharacter = possibleCharacter.concat(numericCharacters);
+    guaranteedCharacter.push(getRandom(numericCharacters));
+  }
+
+  //Printing to console the possible and guaranteed characters to ensure code works correctly
+  console.log("Possible characters are" + possibleCharacter);
+  console.log("Guaranteed characters are" + guaranteedCharacter);
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
