@@ -96,7 +96,7 @@ function getPasswordOptions() {
       "Please enter the number for how many characters long you want the password to be"
     )
   );
-
+  // Creating alerts so that if user inputs invalid data, such as putting non numbers into the number prompt, the alert informs the user they need to enter a valid input
   if (isNaN(userInputLength) === true) {
     alert("Please input a number for password length.");
     return;
@@ -112,6 +112,7 @@ function getPasswordOptions() {
     return;
   }
 
+  // Using confirms to generate boolean results based on if user wants lowercase, uppercase, numbers or special characters
   let userInputLowercase = confirm(
     "Would you like password to include lowercase characters?  Click OK = yes, click cancel = no!"
   );
@@ -127,6 +128,7 @@ function getPasswordOptions() {
     "Would you like password to include special characters? Click OK = yes, click cancel = no!"
   );
 
+  // Gives user a warning via alert that they did not confirm any type of character so password cannot be generated
   if (
     userInputLowercase === false &&
     userInputUppercase === false &&
@@ -155,9 +157,6 @@ function getRandom(arr) {
   console.log(randomElement);
   return randomElement;
 }
-
-// Calling function to get random element from array
-//getRandom();
 
 // Function to generate password with user input
 function generatePassword() {
@@ -195,6 +194,16 @@ function generatePassword() {
   //Printing to console the possible and guaranteed characters to ensure code works correctly
   console.log("Possible characters are" + possibleCharacter);
   console.log("Guaranteed characters are" + guaranteedCharacter);
+
+  for (let index = 0; index < options.length; index++) {
+    var generated = getRandom(possibleCharacter);
+    console.log("Generated is :" + generated);
+    result.push(generated);
+  }
+
+  console.log("Result is" + result);
+
+  return result.join("");
 }
 
 // Get references to the #generate element
