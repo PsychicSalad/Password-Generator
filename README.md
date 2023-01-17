@@ -38,3 +38,7 @@ Console log showing randomly generated characters based on specifications next t
 The deployed page can be accessed at:
 
 If you wish to view the repository for this project, the GitHub repository can be accessed at:
+
+## License
+
+This project uses an MIT license. To find out more, please view the license folder.
