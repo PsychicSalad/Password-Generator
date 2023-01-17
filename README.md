@@ -37,7 +37,11 @@ Console log showing randomly generated characters based on specifications next t
 
 The deployed page can be accessed at:
 
+https://psychicsalad.github.io/Password-Generator/
+
 If you wish to view the repository for this project, the GitHub repository can be accessed at:
+
+https://github.com/PsychicSalad/Password-Generator
 
 ## License
 
